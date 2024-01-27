@@ -1,0 +1,1 @@
+# Workshop.EventSourcedCsharp.NDCLondon2024
