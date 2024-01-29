@@ -1,16 +1,6 @@
-﻿using BeerSender.Domain.Boxes;
-using BeerSender.Domain.Boxes.Handlers;
+﻿using System.Reflection;
 
 namespace BeerSender.Domain;
-
-public record Command_message(
-    Guid Aggregate_id,
-    object Command);
-
-public record Event_message(
-    Guid Aggregate_id,
-    int Sequence,
-    object Event);
 
 public class Command_router
 {
@@ -34,12 +24,32 @@ public class Command_router
             ++max_sequence,
             ev)));
 
-        switch (command.Command)
+        var command_type = command.Command.GetType();
+        var handler_type = Command_handlers[command_type].Handler_type;
+        var handle_method = Command_handlers[command_type].Handle_method;
+
+        var instance = Activator.CreateInstance(handler_type, 
+            filtered_stream.Select(e => e.Event), publish);
+
+        handle_method.Invoke(instance, new[] { command.Command });
+    }
+
+    private static readonly Dictionary<Type, (Type Handler_type, MethodInfo Handle_method)>
+        Command_handlers = new();
+
+    static Command_router()
+    {
+        // Get all handlers with base type Command_handler (only 1st level base type)
+        var handler_types = typeof(Command_router).Assembly.GetTypes()
+            .Where(t => t is { IsClass: true, IsAbstract: false })
+            .Where(t => t.BaseType?.Name == typeof(Command_handler<,>).Name);
+
+        // Add them to the registry: command type -> handler type, apply & handle
+        foreach (var handler_type in handler_types)
         {
-            case Get_box get_box:
-                var handler = new Get_box_handler(filtered_stream, publish);
-                handler.Handle(get_box);
-                break;
+            var command_type = handler_type.BaseType?.GenericTypeArguments.First();
+            var handle_method = handler_type.GetMethod("Handle")!;
+            Command_handlers.Add(command_type!, (handler_type, handle_method));
         }
     }
 }

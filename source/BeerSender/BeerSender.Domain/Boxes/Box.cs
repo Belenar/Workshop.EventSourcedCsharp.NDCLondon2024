@@ -1,16 +1,17 @@
 ﻿namespace BeerSender.Domain.Boxes;
 
-public class Box
+class Box: Aggregate
 {
     public Capacity? Capacity { get; private set; }
-
-    public void Apply(object @event)
-    {
-        throw new Exception($"Event type {@event.GetType()} not implemented for {this.GetType()}.");
-    }
+    public List<Bottle> Contents { get; } = new();
 
     public void Apply(Box_created @event)
     {
         Capacity = @event.Capacity;
+    }
+
+    public void Apply(Beer_added @event)
+    {
+        Contents.Add(@event.Beer);
     }
 }
