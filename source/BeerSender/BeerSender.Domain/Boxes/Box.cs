@@ -6,7 +6,7 @@ public class Box
 
     public void Apply(object @event)
     {
-        throw new Exception($"Event type {@event.GetType()} not implemented for {this.GetType()}.")
+        throw new Exception($"Event type {@event.GetType()} not implemented for {this.GetType()}.");
     }
 
     public void Apply(Box_created @event)
