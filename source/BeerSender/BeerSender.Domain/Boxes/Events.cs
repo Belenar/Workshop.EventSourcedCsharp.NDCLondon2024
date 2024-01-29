@@ -24,7 +24,7 @@ public record Box_failed_to_close(Box_failed_to_close.Fail_reason Reason)
 }
 
 // Add label
-public record Label_was_invalid(string Reason);
+public record Label_was_invalid();
 public record Label_applied(Shipping_label Label);
 
 // Ship box

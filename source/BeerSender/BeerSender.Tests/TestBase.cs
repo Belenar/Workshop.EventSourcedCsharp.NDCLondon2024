@@ -41,8 +41,16 @@ public class TestBase
             new_event.GetType()
                 .Should().Be(expected_event.GetType());
 
-            new_event
-                .Should().BeEquivalentTo(expected_event);
+            try
+            {
+                new_event
+                    .Should().BeEquivalentTo(expected_event);
+            }
+            catch (InvalidOperationException ex)
+            {
+                if (!ex.Message.StartsWith("No members were found for comparison."))
+                    throw;
+            }
         }
     }
 }
