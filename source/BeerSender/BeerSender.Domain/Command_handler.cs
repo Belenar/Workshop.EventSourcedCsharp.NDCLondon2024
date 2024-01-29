@@ -2,6 +2,7 @@
 
 abstract class Command_handler<TCommand, TAggregate>
     where TAggregate : Aggregate, new()
+    where TCommand : Command
 {
     private readonly IEnumerable<object> _event_stream;
     private readonly Action<object> _publish_event;
