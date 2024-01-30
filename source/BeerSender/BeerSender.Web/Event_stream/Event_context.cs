@@ -25,7 +25,7 @@ public class Event_model
     public string Event_type { get; set; }
     public string Event_payload { get; set; }
     public DateTime Timestamp { get; set; }
-    public byte[] Row_version { get; set; }
+    public ulong Row_version { get; set; }
     // Possibly: correlation ID, conversation ID
 
     private Event? _event;

@@ -2,6 +2,7 @@ using BeerSender.Domain;
 using BeerSender.Web.Event_stream;
 using BeerSender.Web.Hubs;
 using BeerSender.Web.JsonHelpers;
+using BeerSender.Web.Read_database;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,11 @@ builder.Services.AddControllers()
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<Read_context>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Read_context"));
+});
 
 builder.Services.AddDbContext<Event_context>(options =>
 {
