@@ -20,7 +20,7 @@ public class TestBase
         }
     }
 
-    protected void When(object command)
+    protected void When(Command command)
     {
         var router = new Command_router(_ => _event_stream,
             _new_events.Add);
