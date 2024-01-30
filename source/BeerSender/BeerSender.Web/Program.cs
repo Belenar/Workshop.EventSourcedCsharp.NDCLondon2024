@@ -1,3 +1,4 @@
+using BeerSender.Domain;
 using BeerSender.Web.Event_stream;
 using BeerSender.Web.Hubs;
 using BeerSender.Web.JsonHelpers;
@@ -20,6 +21,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Event_context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Event_context"));
+});
+
+builder.Services.AddScoped<Command_router>(sp =>
+{
+    // resolve your service through sp
+    // create a Command_router with the functions of your service
+    // return it;
 });
 
 var app = builder.Build();

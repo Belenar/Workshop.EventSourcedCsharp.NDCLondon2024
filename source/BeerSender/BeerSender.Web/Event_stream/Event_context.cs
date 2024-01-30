@@ -7,6 +7,9 @@ namespace BeerSender.Web.Event_stream;
 
 public class Event_context : DbContext
 {
+    public Event_context(DbContextOptions<Event_context> options) : base(options)
+    { }
+
     public DbSet<Event_model> Events => Set<Event_model>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
