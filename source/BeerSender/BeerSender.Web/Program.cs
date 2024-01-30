@@ -2,6 +2,7 @@ using BeerSender.Domain;
 using BeerSender.Web.Event_stream;
 using BeerSender.Web.Hubs;
 using BeerSender.Web.JsonHelpers;
+using BeerSender.Web.Projections;
 using BeerSender.Web.Read_database;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,6 +40,9 @@ builder.Services.AddScoped<Command_router>(sp =>
     );
     return router;
 });
+
+builder.Services.AddScoped<Box_status_projection>();
+builder.Services.AddHostedService<Projection_service<Box_status_projection>>();
 
 var app = builder.Build();
 

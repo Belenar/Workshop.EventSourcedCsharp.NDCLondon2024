@@ -69,7 +69,7 @@ public class Projection_service<TProjection> : BackgroundService
         {
             checkpoint = new Projection_checkpoint
             {
-                Projection_name = GetType().Name,
+                Projection_name = typeof(TProjection).Name,
                 Event_version = 0
             };
             context.Projection_checkpoints.Add(checkpoint);
