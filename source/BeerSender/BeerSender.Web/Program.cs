@@ -1,4 +1,5 @@
 using BeerSender.Web.Hubs;
+using BeerSender.Web.JsonHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ builder.Services.AddSignalR();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        // Add JSON options here
+        options.JsonSerializerOptions.Converters.Add(new Command_converter());
     });
 
 builder.Services.AddEndpointsApiExplorer();
