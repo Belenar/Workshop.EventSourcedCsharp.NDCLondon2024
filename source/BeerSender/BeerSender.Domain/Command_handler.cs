@@ -4,11 +4,11 @@ abstract class Command_handler<TCommand, TAggregate>
     where TAggregate : Aggregate, new()
     where TCommand : Command
 {
-    private readonly IEnumerable<object> _event_stream;
-    private readonly Action<object> _publish_event;
+    private readonly IEnumerable<Event> _event_stream;
+    private readonly Action<Event> _publish_event;
 
-    protected Command_handler(IEnumerable<object> event_stream,
-        Action<object> publish_event)
+    protected Command_handler(IEnumerable<Event> event_stream,
+        Action<Event> publish_event)
     {
         _event_stream = event_stream;
         _publish_event = publish_event;
@@ -31,7 +31,7 @@ abstract class Command_handler<TCommand, TAggregate>
         }
     }
 
-    protected abstract IEnumerable<object> Handle_command(
+    protected abstract IEnumerable<Event> Handle_command(
         TAggregate aggregate,
         TCommand command);
 }

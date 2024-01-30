@@ -19,7 +19,7 @@ public class Command_router
     {
         var filtered_stream = _event_stream(command.Aggregate_id);
         var max_sequence = filtered_stream.Select(e => e.Sequence).DefaultIfEmpty().Max();
-        Action<object> publish = (ev => _publish_event(new Event_message(
+        Action<Event> publish = (ev => _publish_event(new Event_message(
             command.Aggregate_id,
             ++max_sequence,
             ev)));

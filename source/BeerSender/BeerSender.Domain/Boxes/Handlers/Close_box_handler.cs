@@ -3,12 +3,12 @@
 class Close_box_handler : Command_handler<Close_box, Box>
 {
     public Close_box_handler(
-        IEnumerable<object> event_stream,
-        Action<object> publish_event)
+        IEnumerable<Event> event_stream,
+        Action<Event> publish_event)
         : base(event_stream, publish_event)
     { }
 
-    protected override IEnumerable<object> Handle_command(
+    protected override IEnumerable<Event> Handle_command(
         Box aggregate,
         Close_box command)
     {

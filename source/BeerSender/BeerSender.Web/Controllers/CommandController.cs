@@ -12,13 +12,13 @@ public class CommandController : ControllerBase
 {
     // Polymorphic endpoint (requires another fix for OpenAPI spec)
     [HttpPost]
-    public void Post([FromBody] Command_message value)
+    public void Post([FromBody] Command_message command)
     {
     }
 
     // Command-specific endpoints
     [HttpPost("{aggregate_id}/Get_box")]
-    public void Post([FromRoute]Guid aggregate_id, [FromBody] Get_box value)
+    public void Post([FromRoute]Guid aggregate_id, [FromBody] Get_box command)
     {
     }
 }

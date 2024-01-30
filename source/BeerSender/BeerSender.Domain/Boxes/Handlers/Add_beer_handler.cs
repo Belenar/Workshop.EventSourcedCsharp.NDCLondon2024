@@ -3,12 +3,12 @@
 class Add_beer_handler : Command_handler<Add_beer, Box>
 {
     public Add_beer_handler(
-        IEnumerable<object> event_stream,
-        Action<object> publish_event)
+        IEnumerable<Event> event_stream,
+        Action<Event> publish_event)
         : base(event_stream, publish_event)
     { }
 
-    protected override IEnumerable<object> Handle_command(
+    protected override IEnumerable<Event> Handle_command(
         Box aggregate,
         Add_beer command)
     {

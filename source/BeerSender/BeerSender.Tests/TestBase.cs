@@ -9,7 +9,7 @@ public class TestBase
     private readonly List<Event_message> _event_stream = new();
     private readonly List<Event_message> _new_events = new();
 
-    protected void Given(params object[] past_events)
+    protected void Given(params Event[] past_events)
     {
         foreach (var @event in past_events)
         {
