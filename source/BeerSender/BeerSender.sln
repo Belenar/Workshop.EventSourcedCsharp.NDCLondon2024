@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerSender.Web", "BeerSender.Web\BeerSender.Web.csproj", "{1B3D4B73-5532-421C-AC33-4258FE5190CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.Domain", "BeerSender.Domain\BeerSender.Domain.csproj", "{B1E2B1CF-06C9-43B1-ABD3-D0C30035C601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerSender.Domain", "BeerSender.Domain\BeerSender.Domain.csproj", "{B1E2B1CF-06C9-43B1-ABD3-D0C30035C601}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.Tests", "BeerSender.Tests\BeerSender.Tests.csproj", "{C41DBC6A-4B9D-4C99-95DD-B602E678D36A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerSender.Tests", "BeerSender.Tests\BeerSender.Tests.csproj", "{C41DBC6A-4B9D-4C99-95DD-B602E678D36A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -22,12 +22,16 @@ builder.Services.AddDbContext<Event_context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Event_context"));
 });
+builder.Services.AddScoped<Event_service>();
 
 builder.Services.AddScoped<Command_router>(sp =>
 {
-    // resolve your service through sp
-    // create a Command_router with the functions of your service
-    // return it;
+    var event_service = sp.GetRequiredService<Event_service>();
+    var router = new Command_router(
+        event_service.Get_events,
+        event_service.AddEvent
+    );
+    return router;
 });
 
 var app = builder.Build();

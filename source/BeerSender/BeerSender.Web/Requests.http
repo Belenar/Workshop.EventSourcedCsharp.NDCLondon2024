@@ -1,0 +1,70 @@
+@hostname=localhost
+@port=43567
+@aggregate_id=A429E212-4D79-41A8-A9E9-ADE1727A5666
+
+POST https://{{hostname}}:{{port}}/api/command
+Content-Type: application/json
+
+{
+  "$type": "Get_box",
+  "aggregate_id": "{{aggregate_id}}",
+  "command": {
+    "Desired_number_of_spots": 6
+  }
+}
+
+###
+
+POST https://{{hostname}}:{{port}}/api/command
+Content-Type: application/json
+
+{
+  "$type": "Add_beer",
+  "aggregate_id": "{{aggregate_id}}",
+  "command": {
+    "Beer": {
+      "Brewery": "Gouden Carolus",
+      "Name": "Quadrupel Whisky Infused",
+      "Alcohol_percentage": 11.7,
+      "Volume_in_ml": 330
+    }
+  }
+}
+
+###
+
+POST https://{{hostname}}:{{port}}/api/command
+Content-Type: application/json
+
+{
+  "$type": "Apply_shipping_label",
+  "aggregate_id": "{{aggregate_id}}",
+  "command": {
+    "Label": {
+      "Carrier": 0,
+      "Tracking_code": "ABC123"
+    }
+  }
+}
+
+###
+
+POST https://{{hostname}}:{{port}}/api/command
+Content-Type: application/json
+
+{
+  "$type": "Close_box",
+  "aggregate_id": "{{aggregate_id}}",
+  "command": { }
+}
+
+###
+
+POST https://{{hostname}}:{{port}}/api/command
+Content-Type: application/json
+
+{
+  "$type": "Ship_box",
+  "aggregate_id": "{{aggregate_id}}",
+  "command": { }
+}

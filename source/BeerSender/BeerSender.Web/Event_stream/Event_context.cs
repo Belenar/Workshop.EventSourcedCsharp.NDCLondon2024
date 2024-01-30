@@ -28,16 +28,16 @@ public class Event_model
     public byte[] Row_version { get; set; }
     // Possibly: correlation ID, conversation ID
 
-    private object? _event;
+    private Event? _event;
 
-    public object Event
+    public Event Event
     {
         get
         {
             if (_event is null)
             {
                 var type = TypeLookup[Event_type];
-                _event = JsonSerializer.Deserialize(Event_payload, type);
+                _event = JsonSerializer.Deserialize(Event_payload, type) as Event;
             }
             return _event!;
         }
@@ -45,7 +45,7 @@ public class Event_model
         {
             _event = value;
             Event_type = _event.GetType().Name;
-            Event_payload = JsonSerializer.Serialize(_event);
+            Event_payload = JsonSerializer.Serialize((object)_event);
         }
     }
 
