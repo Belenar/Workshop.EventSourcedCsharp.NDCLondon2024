@@ -67,6 +67,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
-app.MapHub<EventHub>("/event-hub");
+app.MapHub<Event_publish_hub>("/event-hub");
 
 app.Run();

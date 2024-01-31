@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using BeerSender.Domain;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BeerSender.Web.Hubs;
 
-public class EventHub : Hub
+public class Event_publish_hub : Hub
 {
-    public async Task publish_event(Guid aggregate_id, object @event)
+    public async Task publish_event(Guid aggregate_id, Event @event)
     {
         await Clients.Group(aggregate_id.ToString())
             .SendAsync("publish_event", aggregate_id, @event);

@@ -22,9 +22,10 @@ document.getElementById("createPackage").addEventListener("click", function (eve
     });
 
     var command = {
-        "$type": "CreatePackage",
+        "$type": "Get_box",
+        "aggregate_id": aggregate_id,
         "command": {
-            "Aggregate_id": aggregate_id
+            "Desired_number_of_spots": 24 
         }
     }
     postCommand(command);
@@ -37,10 +38,13 @@ document.getElementById("addLabel").addEventListener("click", function (event) {
     var package_label = document.getElementById("label_input").value;
 
     var command = {
-        "$type": "AddLabel",
+        "$type": "Apply_shipping_label",
+        "aggregate_id": aggregate_id,
         "command": {
-            "Aggregate_id": aggregate_id,
-            "Label": package_label
+            "Label": {
+                "Carrier": 0,
+                "Tracking_code": package_label
+            }
         }
     }
     postCommand(command);

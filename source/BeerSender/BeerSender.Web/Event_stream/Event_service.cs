@@ -1,9 +1,15 @@
 ﻿using BeerSender.Domain;
+using BeerSender.Web.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BeerSender.Web.Event_stream;
 
-public class Event_service(Event_context event_context)
+public class Event_service(
+    Event_context event_context, 
+    IHubContext<Event_publish_hub> hub_context)
 {
+    private List<Event_message> _messages = new ();
+
     public IEnumerable<Event_message> Get_events(Guid aggregate_id)
     {
         return event_context.Events
@@ -22,10 +28,18 @@ public class Event_service(Event_context event_context)
                 Event = @event.Event,
                 Timestamp = DateTime.UtcNow
             });
+        _messages.Add(@event);
     }
 
     public void Commit()
     {
         event_context.SaveChanges();
+
+        foreach (var event_message in _messages)
+        {
+
+            hub_context.Clients.Groups(event_message.Aggregate_id.ToString())
+                .SendAsync("publish_event", event_message.Aggregate_id, event_message.Event);
+        }
     }
 }
